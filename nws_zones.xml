@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<alerts>
+    <zone>
+        <state>New Mexico</state>
+        <number>NMZ412</number>
+        <desc>Central Tularosa Basin</desc>
+        <adesc>CTL TULAROSA</adesc>
+    </zone>
+
+    <zone>
+        <state>New Mexico</state>
+        <number>NMZ414</number>
+        <desc>West Slopes Sacremento Mountains Below 7500 Feet</desc>
+        <adesc>W SAC MTNS 7500-</adesc>
+    </zone>
+
+    <zone>
+        <state>New Mexico</state>
+        <number>NMZ415</number>
+        <desc>Sacremento Mountains Above 7500 Feet</desc>
+        <adesc>SAC MTNS 7500+</adesc>
+    </zone>
+
+    <zone>
+        <state>New Mexico</state>
+        <number>NMZ416</number>
+        <desc>East Slopes Sacremento Mountains Below 7500 Feet</desc>
+        <adesc>E SAC MTNS 7500-</adesc>
+    </zone>
+
+    <zone>
+        <state>New Mexico</state>
+        <number>NMC035</number>
+        <desc>Otero County</desc>
+        <adesc>OTERO COUNTY</adesc>
+    </zone>
+
+    <zone>
+        <state>Virginia</state>
+        <number>VAZ034</number>
+        <desc>Bedford</desc>
+        <adesc>BEDFORD</adesc>
+    </zone>
+
+    <zone>
+        <state>Virginia</state>
+        <number>VAC019</number>
+        <desc>Bedford County</desc>
+        <adesc>BEDFORD COUNTY</adesc>
+    </zone>
+</alerts>

@@ -1,0 +1,23 @@
+# This document contains the proposed APRS-NWS bulletin format for a weather alert.
+# NOTE:  The bulletin identifier does not comply with APRS v1.01 specification for an NWS Bulletin due to not having a hyphen('-') in the 4th position of the identifier.
+#        This was a deliberate change to permit implementing the official NWS state/zone designation in the bulletin identifier as many user radios have the ability to filter bulletins by identifiers, including wildcard characters.
+         This change allows users easily to set specific identifiers of interest into their radio filters.
+
+# As noted in the APRS v1.01 specification, the message identifier at the end of this bulletin is for reference only.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+TO: NWSXXXXXX
+
+ZNTXT__________  EVENT_TYPE  TYPE SEV CTY URG CATG DD/HHMM-DD/HHMM
+
+CTL TULAROSA    *DUSTRM ADV* ALRT MOD-POS-EXP MET  14/1900-14/2200 
+PHOENIX METRO   *RADHAZ WRN* ALRT SVR-OBS-IMM SFTY 14/2330-15/2345 
+PHOENIX METRO   *FLSHFD WRN* UPDT SVR-LIK-EXP MET  14/2300-15/0045 
+W MARICOPA CTY  *EXHEAT WRN* CANX MIN-ULK-PST MET  15/0001-15/1800  
+
+--------------
+|APRS BULLETIN|
+--------------
+:NWSXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX{XXXXX
+:NWSAZZ023:PHOENIX METRO   *FLSHFD WRN* UPDT SVR-LIK-EXP MET  14/2300-15/0045{00001
