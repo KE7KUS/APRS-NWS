@@ -15,65 +15,45 @@ import re
 
 class CAP11:
     """Class definition for a CAP v1.1 message - http://www.oasis-open.org/committees/download.php/14759/emergency-CAPv1.1/pdf"""
-
-    def __init__(self):
                     
-        #A valid CAP message has four components - 
+        #A valid CAP message has two major components - 
         #REQUIRED:  alert
-        #OPTIONAL:  info, resource, area
+        #OPTIONAL:  info (can be more than one info tag)
     
-        def message(self, alert, info=None, resource=None, area=None):
-            self.alert = alert
-            if self.info is None:
-                self.info = ""
-            else:
-                self.info = info
-            if resource is None:
-                self.resource = ""
-            else:
-                self.resource = resource
-            if self.area is None:
-                self.area = ""
-            else:
-                self.area = area
-                
+    def message(self, alert, *info):
+        self.alert = alert
+        self.info = info
+            
         #A CAP message alert element has the following sub-elements - 
         #REQUIRED: identifier, sender, sent, status, msgType, scope
         #OPTIONAL: source, restriction, addresses, code, note, references, incidents
     
-        def alert(self,identifier,sender,sent,status,msgType,source=None,scope,restriction=None,addresses=None,code=None,note=None,references=None,incidents=None):
-            self.xmlns = ("urn:oasis:names:tc:emergency:cap:1.1")   #An alert must include the xmlns attribute referencing CAP URN as the namespace
+    def alert(self, identifier, sender, sent, status, msgType, source=None, scope, restriction=None, addresses=None, code=None, note=None, references=None, incidents=None):
+        
+        self.xmlns = ("urn:oasis:names:tc:emergency:cap:1.1")   #An alert must include the xmlns attribute referencing CAP URN as the namespace
+        self.invalid_chars = re.compile('[ ,&<]')               #The characters [space],[comma],[ampersand], and [less than] are invalid characters
+        
+        if self.invalid_chars.match(identifier) == None:        #Evaluate the alert identifier for invalud character content
             self.identifier = identifier
-            self.sender = sender
-            self.sent = sent
-            self.status = status
-            self.msgType = msgType
-            if self.source is None:
-                self.source = ""
-            else:
-                self.source = source
-            self.scope = scope
-            if self.restriction is None:
-                self.restriction = ""
-            else:
-                self.restriction = restriction 
-            if self.addresses is None:
-                self.addresses = ""
-            else:
-                self.addresses = addresses
-            if self.code is None:
-                self.code = ""
-            else:
-                self.code = code
-            if self.note is None:
-                self.note = ""
-            else:
-                self.note = note 
-            if self.references is None:
-                self.references = ""
-            else:
-                self.references = references
-            if self.incidents is None:
-                self.incidents = ""
-            else:
-                self.incidents = incidents
+        else:
+            self.identifier = None
+            print('Invalid CAP identifier: ' + identifier + ':Value set to None.')
+         
+        if self.invalid_chars.match(sender) == None:
+            self.sender = sender 
+        else:
+            self.sender = None
+            print('Invalid CAP sender: ' + sender + ':Value set to None.')
+        
+        self.sent = sent
+        self.status = status
+        self.msgType = msgType
+        self.source = source
+        self.scope = scope
+        self.restriction = restriction 
+        self.addresses = addresses
+        self.code = code
+        self.note = note 
+        self.references = references
+        self.incidents = incidents
+    def info(self):
