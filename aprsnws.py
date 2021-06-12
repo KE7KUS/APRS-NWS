@@ -203,8 +203,8 @@ def main():
     while True:
         try:
             # Clean up the old alerts file so we can add a new one
-            if os.path.exists('wxalerts.txt'):
-                os.remove('wxalerts.txt')
+            if os.path.exists('/tmp/wxalerts.txt'):
+                os.remove('/tmp/wxalerts.txt')
 
             entries = t.xpath('count(atom:entry)', namespaces=ns)
             e = 1    
@@ -235,7 +235,7 @@ def main():
                     tocall = str(z) + '   '
                     zonetext = makeZoneText(z)
                     fullmsg =(f':{tocall}:{zonetext} ' + wxmsg)
-                    with open('wxalerts.txt', 'a') as f:
+                    with open('/tmp/wxalerts.txt', 'a') as f:
                         f.writelines(appendMsgId(fullmsg) + '\n')
                 e += 1
         except:
