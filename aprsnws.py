@@ -1,8 +1,18 @@
 #!/usr/bin/python3
 
-# APRS NWS Feedparser
-# January 2021
-# Released under GPLv3
+# APRS-NWS
+# Copyright 2021, Kurt Kochendarfer (KE7KUS)
+
+# ===GNU Public License v3===
+# This file is part of APRS-NWS.
+
+# APRS-NWS is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License 
+# as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+# APRS-NWS is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along with APRS-NWS.  If not, see <https://www.gnu.org/licenses/>.
 
 import datetime, requests, os
 import lxml.etree as et
@@ -117,10 +127,10 @@ def xpGetCAPGeocodeValue(entry_no, default='N/A'):
     return i if entry_no else default
 
 def makeToCall(geocode):
-    """Make 9-character NWSXXXXXX to-call for weather alert message where XXXXXX is a standardized NWS county or zone identifier."""
+    """Make 9-character XXXXXX___ to-call for weather alert message where XXXXXX is a standardized six-character NWS county or zone identifier followed by three spaces."""
 
     if len(geocode) <= 6:
-        tocall = 'NWS'+ geocode
+        tocall = str(geocode + '   ')
     else:
         tocall = geocode.split(' ')        
     return tocall
