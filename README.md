@@ -53,7 +53,7 @@ The address was changed from the APRS specification to prevent flooding end-user
 
 ## APRX Integration ##
 This program was designed to produce a text file compatible with the Kenneth Finnegan (W6KWF) fork of APRX: https://thelifeofkenneth.com/aprx/
-Using the `<beacon>` *file* method outlined in Kenneth's APRX manual, where APRX will read and send each line of the output file as an APRS packet.  Note there is no packet validation process in APRX when reading from the file, so incorrectly formed packets produced by APRS-NWS will be transmitted without further checking.
+This program uses the `<beacon>` *file* method outlined in Kenneth's APRX manual, where APRX will read and send each line of the output file as an APRS packet.  Note there is no packet validation process in APRX when reading from the file, so incorrectly formed packets produced by APRS-NWS will be transmitted without further checking.
 
 ## Beacon PATH Considerations ##
 When transmitting these packets, it is **strongly** recommended that sysops utilize the **SSn-N** paradigm wherever local digipeaters are configured to do so.  If local digipeaters do not implement the SSn-N paradigm, sysops should limit the number of hops to a number appropriate to cover no further than their state border.  In most cases, this can be accomplished using a path of **WIDE2-2**.
