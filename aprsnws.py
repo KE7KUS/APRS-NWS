@@ -18,14 +18,6 @@ import datetime, requests, os
 import lxml.etree as et
 from io import BytesIO
 
-# TODO: Process CAP polygons and publish as APRS area items (p. 60 in APRS v1.01 specification)
-# TODO: Break out CAP dictionaries and individual state zone dictionaries into separate files and include with import (makes the system modular for other to contribute).
-# TODO: Interactive query routine to enable user to send query via APRS and have reply if any NWS alerts
-    # - Connect to APRS-IS via TCP on 14580
-    # - Search data stream for TOCALL '?NWSALT'
-    # - Parse msg text for zone/county code and compare to list of existing alerts
-    # - Return alert(s) if found else return None
-
 newsfeed = ('https://alerts.weather.gov/cap/nm.php?x=0')
 ns = {"atom":"http://www.w3.org/2005/Atom", "cap":"urn:oasis:names:tc:emergency:cap:1.1", "ha":"http://www.alerting.net/namespace/index_1.0"}
 
