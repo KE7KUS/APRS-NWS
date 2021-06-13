@@ -237,7 +237,7 @@ def main():
                     fullmsg =(f':{tocall}:{zonetext} ' + wxmsg)
                     with open('/tmp/wxalerts.txt', 'a') as f:
                         f.writelines(appendMsgId(fullmsg) + '\n')
-                    sys.stdout.write(fullmsg)
+                    sys.stdout.write(fullmsg + '\n')
                 e += 1
         except:
             pass
