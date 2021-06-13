@@ -14,7 +14,7 @@
 
 # You should have received a copy of the GNU General Public License along with APRS-NWS.  If not, see <https://www.gnu.org/licenses/>.
 
-import time, datetime, requests, os
+import time, datetime, requests, os, sys
 import lxml.etree as et
 from io import BytesIO
 
@@ -237,6 +237,7 @@ def main():
                     fullmsg =(f':{tocall}:{zonetext} ' + wxmsg)
                     with open('/tmp/wxalerts.txt', 'a') as f:
                         f.writelines(appendMsgId(fullmsg) + '\n')
+                    sys.stdout.write(fullmsg)
                 e += 1
         except:
             pass
