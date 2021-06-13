@@ -200,49 +200,46 @@ def appendMsgId(msg):
     return t_msg
 
 def main():
-    while True:
-        try:
-            # Clean up the old alerts file so we can add a new one
-            if os.path.exists('/tmp/wxalerts.txt'):
-                os.remove('/tmp/wxalerts.txt')
+    try:
+        # Clean up the old alerts file so we can add a new one
+        if os.path.exists('/tmp/wxalerts.txt'):
+            os.remove('/tmp/wxalerts.txt')
 
-            entries = t.xpath('count(atom:entry)', namespaces=ns)
-            e = 1    
-            while e <= entries:
-                zones = xpGetCAPGeocodeValue(e) 
-                eventtype = xpGetEntryEvtType(e)
-                atype = xpGetEntryEvtMsgType(e)
-                severity = xpGetEntryEvtSeverity(e)
-                certainty = xpGetEntryEvtCertainty(e)
-                urgency = xpGetEntryEvtUrgency(e)
-                category = xpGetEntryEvtCategory(e)
-                evt_start = xpGetEntryEvtEffective(e)
-                evt_end = xpGetEntryEvtExpires(e)
+        entries = t.xpath('count(atom:entry)', namespaces=ns)
+        e = 1    
+        while e <= entries:
+            zones = xpGetCAPGeocodeValue(e) 
+            eventtype = xpGetEntryEvtType(e)
+            atype = xpGetEntryEvtMsgType(e)
+            severity = xpGetEntryEvtSeverity(e)
+            certainty = xpGetEntryEvtCertainty(e)
+            urgency = xpGetEntryEvtUrgency(e)
+            category = xpGetEntryEvtCategory(e)
+            evt_start = xpGetEntryEvtEffective(e)
+            evt_end = xpGetEntryEvtExpires(e)
 
-                f_evt_type = makeEventType(eventtype)
-                f_alt_type = makeAlertType(atype)
-                f_severity = makeSeverity(severity)
-                f_certainty = makeCertainty(certainty)
-                f_urgency = makeUrgency(urgency)
-                f_category = makeCategory(category)
-                f_evt_start = makeEffStart(evt_start[0])
-                f_evt_end = makeEffEnd(evt_end[0])
+            f_evt_type = makeEventType(eventtype)
+            f_alt_type = makeAlertType(atype)
+            f_severity = makeSeverity(severity)
+            f_certainty = makeCertainty(certainty)
+            f_urgency = makeUrgency(urgency)
+            f_category = makeCategory(category)
+            f_evt_start = makeEffStart(evt_start[0])
+            f_evt_end = makeEffEnd(evt_end[0])
 
-                wxmsg = makeWxMsgPacket(f_evt_type,f_alt_type,f_severity,f_certainty,f_urgency,f_category,f_evt_start,f_evt_end)
+            wxmsg = makeWxMsgPacket(f_evt_type,f_alt_type,f_severity,f_certainty,f_urgency,f_category,f_evt_start,f_evt_end)
 
-                zonelist = zones[0].split(' ')
-                for z in zonelist:
-                    tocall = str(z) + '   '
-                    zonetext = makeZoneText(z)
-                    fullmsg =(f':{tocall}:{zonetext} ' + wxmsg)
-                    with open('/tmp/wxalerts.txt', 'a') as f:
-                        f.writelines(appendMsgId(fullmsg) + '\n')
-                    sys.stdout.write(fullmsg + '\n')
-                e += 1
-        except:
-            pass
-        
-        time.sleep(1800)
-    
+            zonelist = zones[0].split(' ')
+            for z in zonelist:
+                tocall = str(z) + '   '
+                zonetext = makeZoneText(z)
+                fullmsg =(f':{tocall}:{zonetext} ' + wxmsg)
+                with open('/tmp/wxalerts.txt', 'a') as f:
+                    f.writelines(appendMsgId(fullmsg) + '\n')
+                sys.stdout.write(fullmsg + '\n')
+            e += 1
+    except:
+        pass
+
 if __name__ == '__main__':
     main()
