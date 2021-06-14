@@ -20,13 +20,10 @@ In an effort to improve usability of the original NWS Bulletin format while hono
 * Bulletins should conform to General Bulletin length standards as identified in the APRSv1.01 specification to ensure that existing hardware/software properly displays the alert without truncation
 
 After integrating the above considerations, the following format was devised:
-```
-      ----------------------------------------------------------------------------------------------------------------------------------------------------------
-Item  | : | ADDRESS | : | ZONETEXT | {sp} | * | EVENT TYPE | * | TYPE | {sp} | SEV | - | CER | - | URG | {sp} | CATG | {sp} | EVT START | - | EVT END | { | ID |
-       ---------------------------------------------------------------------------------------------------------------------------------------------------------
-Bytes | 1 |    9    | 1 |    15    |   1  | 1 |     10     | 1 |   4  |   1  |  3  | 1 |  3  | 1 |  3  |   1  |   4  |   1  |      7    | 1 |    7    | 1 | 5  |
-      ----------------------------------------------------------------------------------------------------------------------------------------------------------
-```
+Item | : | ADDRESS | : | ZONETEXT | {sp} | \* | EVENT TYPE | \* | TYPE | {sp} | SEV | - | CER | - | URG | {sp} | CATG | {sp} | EVT START | - | EVT END | { | ID |
+-----|---|---------|---|----------|------|----|------------|----|------|------|-----|---|-----|---|-----|------|------|------|-----------|---|---------|---|----|
+Bytes| 1 |    9    | 1 |    15    |   1  |  1 |     10     |  1 |  4   |   1  |  3  | 1 |  3  | 1 |  3  |   1  |   4  |   1  |     7     | 1 |     7   | 1 |  5
+
 The fields above are specified as follows.  Single byte ASCII characters in the above template are literals and `{sp}` denotes a space:
 
 *ADDRESS*: The bulletin address per the APRS specification.  The original APRS specification's `NWS-xxxxx` format has been replaced with the six-character CAP geocode UGC zone value derived from the NWS weather alert feed format.  The zones pertinent to each US state can be found at the NWS weather alert website listed above.  Examples of valid zones include `NMC035` (Otero County) or `NMZ414` (West Slopes Sacramento Mountains Below 7500 Feet).
