@@ -50,7 +50,13 @@ The address was changed from the APRS specification to prevent flooding end-user
 
 ## APRX Integration ##
 This program was designed to produce output directly to *stdout* to factilitate compatibility with the Kenneth Finnegan (W6KWF) fork of APRX: https://thelifeofkenneth.com/aprx/
-This program uses the `<beacon>` *exec* method outlined in Kenneth's APRX manual, where APRX will read and send each line of written to *stdout* as an APRS packet. Creating a `<beacon>` section in the APRX config file which uses the *exec* function pointed at *aprsnws.py* will cause APRX to run *aprsnws.py* at the configured beacon interval and beacon any weather alerts output to *stdout*.  Note there is no packet validation process in APRX when reading from *stdout*, so incorrectly formed packets produced by APRS-NWS will be transmitted without further checking.
+This program uses the `<beacon>` *exec* method outlined in Kenneth's APRX manual, where APRX will read and send each line of written to *stdout* as an APRS packet. Creating a `<beacon>` section in the APRX config file which uses the *exec* function pointed at *aprxfeeder.py* will cause APRX to run *aprxfeeder.py* at the configured beacon interval and beacon any weather alerts output to *stdout*.  Note there is no packet validation process in APRX when reading from *stdout*, so incorrectly formed packets produced by APRS-NWS will be transmitted without further checking.
+
+To have this software work correctly, the sysop must first start an instance of *aprsnws.py* running in the background:
+
+`./aprsnws.py &`
+
+Once *aprsnws.py* is running in the background, it will generate a new */tmp/wxalerts.txt* file every 30 minutes.  When creating the `<beacon>` section in */etc/aprx.conf*, for best performance ensure the weather alert beacon section is set to a relatively short cycle time (i.e. 5 minutes).  Each time *aprx* runs a beacon cycle, *aprxfeeder.py* will open/read the */tmp/wxalerts.py* file and push the first line of the file to *stdout*, then strip that line out of the file.  With a short cycle time, this process will transmit all alerts in the file one at a time in 5 minute intervals.  The transmit interval may need to be adjusted in the *aprx.conf* file depending on how may alerts appear in the systop alert area.
 
 ## Beacon PATH Considerations ##
 > With great power comes great responsibility.       --*Uncle Ben*
