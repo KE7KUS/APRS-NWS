@@ -37,7 +37,7 @@ def getAlerts(locale):
         t = et.parse(b)
         root = t.getroot()
         return t
-    
+
     except Exception as ex:
         print(f'getAlerts Exception: {ex}')
 
