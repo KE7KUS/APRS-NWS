@@ -14,5 +14,6 @@ if os.path.exists('/tmp/wxalerts.txt'):
             print('No alerts to process.')
         else:
             print('Unknown file length.')
+    f.close()
 else:
     print('No alert file to parse.')
