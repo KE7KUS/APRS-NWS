@@ -340,8 +340,8 @@ def main():
     except Exception as ex:
         print(f'Main Exception: {ex}')
         pass
-        
-    time.sleep(1800)
             
 if __name__ == '__main__':
-    main()
+    while True:
+        main()
+        time.sleep(1800)
